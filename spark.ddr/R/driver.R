@@ -8,7 +8,7 @@ init_spark <- function(master = "local", config_file, ...) {
   message("Backend switched to Spark. Initializing the Spark Context")
 
   if(hasArg(config_file)){
-    message("Using the user specified configuration file")
+    message("Applying user specified configuration file")
     spark_conf <- spark_config(file = config_file)
     sc = sparklyr::spark_connect(master, app_name = "ddR", config = spark_conf)
   }else{
@@ -37,9 +37,13 @@ setMethod("shutdown", "spark.ddR", function(x) {
 })
 
 
+#' @export
+setGeneric("get_parts", function(x, index, ...) standardGeneric("get_parts"))
 
-# Implement
-# do_dmapply
-# do_collect
-# get_parts
+#' @export
+setGeneric("do_collect", function(x, parts) standardGeneric("do_collect"))
+
+#' @export
+setGeneric("do_dmapply", function(x, parts) standardGeneric("do_collect"))
+
  NULL
